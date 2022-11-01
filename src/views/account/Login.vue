@@ -24,7 +24,7 @@ const handleLogin = async () => {
   const { message, data } = await userLogin(form.account, form.password)
   if (message === 'SUCCESS') {
     ElMessage({
-      message: '登录成功',
+      message: '登录成功!',
       type: 'success',
     })
     accountState.setData(
