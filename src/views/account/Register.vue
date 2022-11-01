@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import LoginBackgroundVue from '../../components/background/LoginBackground.vue'
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 
 const form = reactive({
   account: 'houyi',
   password: 'hy971003',
   confirmedPassword: 'hy971003',
+  phone: '',
 })
 </script>
 
@@ -35,6 +36,10 @@ const form = reactive({
           v-model="form.confirmedPassword"
           placeholder="请输入密码"
         />
+      </div>
+      <div class="item">
+        <span>手机：</span>
+        <el-input class="el-input" type="text" v-model="form.phone" placeholder="请输入手机号" />
       </div>
       <div class="item" style="text-align: center; margin-top: 30px">
         <el-button type="primary" class="login-button" style="text-indent: 2em; letter-spacing: 2em"

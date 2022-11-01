@@ -3,7 +3,11 @@ import LoginBackgroundVue from '../../components/background/LoginBackground.vue'
 import { userLogin } from '../../api/user'
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import useAccountStore from '../../store/account.store'
+import { useRouter } from 'vue-router'
 
+const accountState = useAccountStore()
+const router = useRouter()
 const form = reactive({
   account: 'houyi',
   password: 'hy971003',
@@ -17,8 +21,18 @@ const handleLogin = async () => {
     })
     return
   }
-  const res = await userLogin(form.account, form.password)
-  console.log(res)
+  const { message, data } = await userLogin(form.account, form.password)
+  if (message === 'SUCCESS') {
+    ElMessage({
+      message: '登录成功',
+      type: 'success',
+    })
+    accountState.setData(
+      { name: data.name, position: data.position, menus: data.menus },
+      data.token
+    )
+    router.push('/home')
+  }
 }
 </script>
 
